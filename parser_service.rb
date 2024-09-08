@@ -3,6 +3,7 @@
 class ParserService
   def initialize(file)
     @file = file
+    raise Errno::ENOENT unless File.exist?(file)
   end
 
   def page_views
