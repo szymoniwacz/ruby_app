@@ -18,7 +18,14 @@ class ParserService
   end
 
   def unique_page_views
-    []
+    unique_views = Hash.new { |hash, key| hash[key] = [] }
+
+    each_line do |line|
+      page, ip = parse_line(line)
+      unique_views[page] << ip if page && ip && !unique_views[page].include?(ip)
+    end
+
+    sorted_views(unique_views.transform_values(&:count))
   end
 
   private
