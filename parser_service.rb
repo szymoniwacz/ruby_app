@@ -36,6 +36,7 @@ class ParserService
 
   def parse_line(line)
     page, ip = line.split
+    return nil if page.nil? || ip.nil?
 
     [page, ip]
   end
